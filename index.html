@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You ❤️</title>
+
+<style>
+
+/* =========================
+   BASIC
+========================= */
+    
+.lovePhoto{width:45%;max-width:200px;aspect-ratio:1:1;object-fit:cover;border-radius:20px;display:inline-block;margin:20px auto;}
+    
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #050308;
+    color: white;
+    font-family: Georgia, serif;
+    overflow: hidden;
+}
+
+
+/* =========================
+   PAGES
+========================= */
+
+.page {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(120, 25, 80, .25),
+            transparent 40%
+        ),
+        #050308;
+}
+
+.page.active {
+    display: flex;
+}
+
+
+/* =========================
+   OPENING
+========================= */
+
+#openingPage {
+    position: relative;
+    overflow: hidden;
+}
+
+.glow {
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 40, 150, .12);
+
+    filter: blur(60px);
+
+    animation: glow 4s infinite alternate;
+}
+
+@keyframes glow {
+
+    from {
+        transform: scale(.8);
+        opacity: .4;
+    }
+
+    to {
+        transform: scale(1.2);
+        opacity: .9;
+    }
+}
+
+
+.content {
+    position: relative;
+    z-index: 5;
+
+    width: 90%;
+    max-width: 600px;
+
+    text-align: center;
+}
+
+
+.smallText {
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 5px;
+
+    color: rgba(255,255,255,.4);
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   HEART
+========================= */
+
+#secretHeart {
+
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    
+    width: 150px;
+    height: 150px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    cursor: pointer;
+
+    --size: 1;
+
+    transition:
+        transform .3s
+        cubic-bezier(.2,1.5,.4,1);
+}
+
+
+#secretHeart::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 5px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    animation:
+        rotateRing 5s linear infinite;
+}
+
+
+#secretHeart::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -10px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,80,170,.1);
+
+    animation:
+        ringPulse 3s infinite;
+}
+
+
+#secretHeart span {
+
+    font-size: 75px;
+
+    filter:
+        drop-shadow(
+            0 0 25px
+            rgba(255,40,150,.8)
+        );
+
+    animation:
+        heartbeat 2s infinite;
+}
+
+
+@keyframes heartbeat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+
+@keyframes rotateRing {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+@keyframes ringPulse {
+
+    0%, 100% {
+        transform: scale(.95);
+        opacity: .2;
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: .8;
+    }
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+#secretTitle {
+
+    font-size: 45px;
+
+    font-weight: normal;
+
+    margin:
+        30px 0 10px;
+}
+
+
+#secretText {
+
+    font-family: Arial, sans-serif;
+
+    color:
+        rgba(255,255,255,.65);
+
+    min-height: 25px;
+}
+
+
+#hint {
+
+    margin-top: 30px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    color:
+        rgba(255,255,255,.3);
+
+    animation:
+        hint 2s infinite;
+}
+
+
+@keyframes hint {
+
+    0%,100% {
+        opacity: .3;
+    }
+
+    50% {
+        opacity: .8;
+    }
+}
+
+
+/* =========================
+   TAP
+========================= */
+
+.tap {
+    animation: tap .15s;
+}
+
+@keyframes tap {
+
+    50% {
+        transform:
+            scale(
+                calc(var(--size) + .12)
+            );
+    }
+}
+
+
+/* =========================
+   EXPLOSION
+========================= */
+
+.explode {
+
+    animation:
+        explode .7s forwards;
+}
+
+@keyframes explode {
+
+    0% {
+        transform:
+            scale(var(--size));
+
+        opacity: 1;
+    }
+
+    40% {
+        transform: scale(2);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(5);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   REVEAL
+========================= */
+
+#secretReveal {
+
+    display: none;
+
+    animation:
+        reveal 1s forwards;
+}
+
+
+#secretReveal .emoji {
+
+    font-size: 70px;
+
+    animation:
+        floating 2s infinite;
+}
+
+
+#secretReveal h1 {
+
+    font-size: 42px;
+
+    font-weight: normal;
+}
+
+
+#secretReveal p {
+
+    font-family: Arial, sans-serif;
+
+    color:
+        rgba(255,255,255,.65);
+}
+
+
+@keyframes reveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(.8)
+            translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+@keyframes floating {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+button {
+
+    border:
+        1px solid
+        rgba(255,255,255,.2);
+
+    background:
+        rgba(255,255,255,.07);
+
+    color: white;
+
+    padding:
+        14px 30px;
+
+    border-radius: 30px;
+
+    font-size: 16px;
+
+    margin-top: 20px;
+
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(.95);
+}
+
+
+/* =========================
+   FALLING HEARTS
+========================= */
+
+.confetti {
+
+    position: fixed;
+
+    top: -50px;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    animation:
+        fall linear forwards;
+}
+
+
+@keyframes fall {
+
+    from {
+        transform:
+            translateY(-50px)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+    }
+}
+
+
+/* =========================
+   MESSAGE PAGES
+========================= */
+
+.card {
+
+    width: min(92vw, 600px);
+
+    padding: 40px 25px;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    box-shadow:
+        0 25px 80px
+        rgba(0,0,0,.5);
+
+    backdrop-filter: blur(18px);
+
+    animation:
+        reveal 1s ease;
+}
+
+
+.card h1 {
+
+    font-size: 42px;
+
+    font-weight: normal;
+
+    margin-bottom: 20px;
+}
+
+
+.card p {
+
+    font-family: Arial, sans-serif;
+
+    color:
+        rgba(255,255,255,.7);
+
+    line-height: 1.7;
+
+    font-size: 16px;
+}
+
+
+/* =========================
+   PHOTOS
+========================= */
+
+.photos {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+.photos img {
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    border-radius: 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+}
+
+
+/* =========================
+   FINAL HEART
+========================= */
+
+.finalHeart {
+
+    font-size: 70px;
+
+    animation:
+        floating 2s infinite;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    #secretTitle {
+        font-size: 38px;
+    }
+
+    #secretHeart {
+        width: 140px;
+        height: 140px;
+    }
+
+    #secretHeart span {
+        font-size: 70px;
+    }
+
+    #secretReveal h1 {
+        font-size: 36px;
+    }
+
+    .card h1 {
+        font-size: 36px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PAGE 1
+===================================================== -->
+
+<section
+    class="page active"
+    id="openingPage"
+>
+
+    <div class="glow"></div>
+
+    <div class="content">
+
+        <div class="smallText">
+            A LITTLE SOMETHING...
+        </div>
+
+
+        <div
+            id="secretHeart"
+            onclick="secretTap()"
+        >
+            <span>❤️</span>
+        </div>
+
+
+        <h1 id="secretTitle">
+            For you.
+        </h1>
+
+
+        <p id="secretText">
+            ♡
+        </p>
+
+
+        <div id="hint">
+            TOUCH THE HEART
+        </div>
+
+
+        <!-- SECRET REVEAL -->
+
+        <div id="secretReveal">
+
+            <div class="emoji">
+                💌
+            </div>
+
+            <h1>
+                For my love
+            </h1>
+
+            <p>
+                I made a little something for you.
+            </p>
+
+            <button onclick="nextPage()">
+                Open it ♡
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 2
+===================================================== -->
+
+<section
+    class="page"
+    id="messagePage"
+>
+
+    <div class="card">
+
+        <div class="smallText">
+            JUST FOR YOU
+        </div>
+
+        <h1>
+            My Love ♡
+        </h1>
+
+        <p>
+
+            Lalovee,
+
+            <br><br>
+
+            I made this little thing
+            just for you.
+
+            <br><br>
+
+            I don't know what or
+            how to put everything I feel
+            into words, so I wanted to
+            make something you could
+            actually experience. All I can say is that,
+            I Appreciate everything that you have done
+            and made for me, though this message maybe 
+            short but I will make a new and longer one
+            hehehehe Mwahh
+
+            <br><br>
+
+            I love you so much my love. ❤️
+
+        </p>
+
+        <button onclick="goToPage(2)">
+            Keep going →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 3
+===================================================== -->
+
+<section
+    class="page"
+    id="photoPage"
+>
+
+    <div class="card">
+
+        <div class="smallText">
+            OUR MEMORIES
+        </div>
+
+        <h1>
+            Us ♡
+        </h1>
+
+        <p>
+            Some little memories
+            I want to keep close.
+        </p>
+
+
+        <div class="Photo">
+
+            <img src="Images/Messenger_creation_13861C9F-FC4A-4765-ACB2-D2F6F85B880E.jpeg"alt="Memory 1"class="lovePhoto">
+            
+            <img src="Images/Messenger_creation_3339014A-43B1-4142-A191-34C4A4EDD89F.jpeg"alt="Memory 2"class="lovePhoto">            
+            
+            <br>
+            
+            <img src="Images/Messenger_creation_4D9FB6E4-79C8-4528-BD8B-D06D8CBA08C3.jpeg"alt="Memory 3"class="lovePhoto">
+            
+            <img src="Images/Messenger_creation_C6F24BA6-D584-4060-946B-B8CA9693CB01.jpeg"alt="Memory 4"class="lovePhoto">
+
+        </div>
+
+
+        <button onclick="goToPage(3)">
+            One more ♡
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 4
+===================================================== -->
+
+<section
+    class="page"
+    id="finalPage"
+>
+
+    <div class="card">
+
+        <div class="smallText">
+            ONE LAST THING
+        </div>
+
+
+        <div class="finalHeart">
+            ❤️
+        </div>
+
+
+        <h1>
+            I Choose You.
+        </h1>
+
+
+        <p>
+
+            No matter how many words
+            I put here, they still wouldn't
+            be enough.
+
+            <br><br>
+
+            I just want us to keep
+            learning, growing, laughing,
+            and choosing each other.
+
+            <br><br>
+
+            Thank you for being you,
+            and Thankyou for choosing me.
+
+            <br><br>
+
+            I love you so much, lalovee. ❤️
+
+        </p>
+
+
+        <button onclick="makeItRain()">
+            One more surprise 💕
+        </button>
+
+    </div>
+
+</section>
+
+
+<script>
+
+
+/* =====================================================
+   PAGE SYSTEM
+===================================================== */
+
+let currentPage = 0;
+
+const pages = [
+
+    document.getElementById("openingPage"),
+
+    document.getElementById("messagePage"),
+
+    document.getElementById("photoPage"),
+
+    document.getElementById("finalPage")
+
+];
+
+
+function goToPage(number) {
+
+    pages[currentPage].classList.remove("active");
+
+    currentPage = number;
+
+    pages[currentPage].classList.add("active");
+
+}
+
+
+/* =====================================================
+   SECRET HEART
+===================================================== */
+
+let taps = 0;
+
+let exploded = false;
+
+
+const heart =
+    document.getElementById("secretHeart");
+
+const title =
+    document.getElementById("secretTitle");
+
+const text =
+    document.getElementById("secretText");
+
+const hint =
+    document.getElementById("hint");
+
+const reveal =
+    document.getElementById("secretReveal");
+
+
+function secretTap() {
+
+    if (exploded) {
+        return;
+    }
+
+
+    taps++;
+
+
+    /* HEART GROWS */
+
+    const size =
+        1 + (taps * 0.035);
+
+    heart.style.setProperty(
+        "--size",
+        size
+    );
+
+    heart.style.transform =
+        "scale(" + size + ")";
+
+
+    /* TAP EFFECT */
+
+    heart.classList.remove("tap");
+
+    void heart.offsetWidth;
+
+    heart.classList.add("tap");
+
+
+    /* TEXT */
+
+    if (taps === 5) {
+        text.innerText = "hmm...";
+    }
+
+    if (taps === 7) {
+        text.innerText = "keep tapping...";
+    }
+
+    if (taps === 9) {
+        text.innerText = "keep tapping 👀";
+    }
+
+    if (taps === 11) {
+        text.innerText = "wait...";
+    }
+
+    if (taps === 12) {
+        text.innerText =
+            "it's getting bigger 😭";
+    }
+
+    if (taps === 13) {
+        text.innerText =
+            "it's about to explode...";
+    }
+
+    if (taps === 14) {
+        text.innerText =
+            "RUN 😭💥";
+    }
+
+
+    /* EXPLODE */
+
+    if (taps >= 15) {
+
+        exploded = true;
+
+        text.innerText = "💥";
+
+        hint.style.display = "none";
+
+        heart.classList.remove("tap");
+
+        heart.classList.add("explode");
+
+
+        createConfetti();
+
+
+        setTimeout(function() {
+
+            heart.style.display = "none";
+
+            title.style.display = "none";
+
+            text.style.display = "none";
+
+            reveal.style.display = "block";
+
+        }, 700);
+
+    }
+
+}
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+function createConfetti() {
+
+    const pieces = [
+
+        "❤️",
+        "💗",
+        "💕",
+        "💖",
+        "💘",
+        "💝",
+        "✨",
+        "🌸",
+        "🫶",
+        "🍓",
+        "🤍"
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < 120;
+        i++
+    ) {
+
+        const piece =
+            document.createElement("div");
+
+
+        piece.className =
+            "confetti";
+
+
+        piece.innerText =
+            pieces[
+                Math.floor(
+                    Math.random() *
+                    pieces.length
+                )
+            ];
+
+
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+
+        piece.style.fontSize =
+            (
+                12 +
+                Math.random() * 25
+            ) + "px";
+
+
+        piece.style.animationDuration =
+            (
+                2.5 +
+                Math.random() * 3
+            ) + "s";
+
+
+        piece.style.animationDelay =
+            Math.random() * .7 + "s";
+
+
+        document.body.appendChild(
+            piece
+        );
+
+
+        setTimeout(function() {
+
+            piece.remove();
+
+        }, 6000);
+
+    }
+
+}
+
+
+/* =====================================================
+   OPEN FIRST PAGE
+===================================================== */
+
+function nextPage() {
+
+    goToPage(1);
+
+}
+
+
+/* =====================================================
+   FINAL SURPRISE
+===================================================== */
+
+function makeItRain() {
+
+    createConfetti();
+
+    setTimeout(
+        createConfetti,
+        500
+    );
+
+    setTimeout(
+        createConfetti,
+        1000
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>
